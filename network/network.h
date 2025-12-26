@@ -3,33 +3,25 @@
 
 #include "../process/process.h"
 
-// Structure pour stocker les informations de connexion d'un hôte distant
+/* * Structure pour gérer les infos de connexion aux machines distantes.
+ * Utilisée pour stocker ce qu'on lit dans le fichier de config.
+ */
 typedef struct remote_host {
     char hostname[256];
     char ip[64];
     int port;
     char username[128];
     char password[128];
-    struct remote_host *next;
+    struct remote_host *next; // Pour faire une liste de serveurs
 } remote_host_t;
 
-/**
- * Lit le fichier de configuration et vérifie les permissions (600).
- * @param filename Chemin du fichier de configuration.
- * @return Liste chaînée des hôtes configurés.
- */
+// Charge le fichier .htop_lp25_config (doit être en chmod 600)
 remote_host_t *load_network_config(const char *filename);
 
-/**
- * Se connecte à un hôte distant via SSH et récupère la liste des processus.
- * @param host Informations sur l'hôte distant.
- * @return Liste chaînée de processus distants.
- */
+// Se connecte en SSH sur l'hôte pour récupérer les processus via la commande 'ps'
 process_t *fetch_remote_processes(remote_host_t *host);
 
-/**
- * Libère la mémoire de la liste des hôtes.
- */
+// Libère la mémoire de la liste des serveurs distants
 void free_remote_hosts(remote_host_t *head);
 
-#endif // NETWORK_H
+#endif
