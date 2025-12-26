@@ -1,10 +1,11 @@
 CC = gcc
 CFLAGS = -Wall -Werror -std=c99 -I.
-LDFLAGS = -lm -lncurses
+# Ajout de -lssh pour la gestion du réseau
+LDFLAGS = -lm -lncurses -lssh
 
 TARGET = htop_lp25
 
-
+# Inclusion de network/network.c dans les sources
 SRC_FILES = main.c manager/manager.c process/process.c ui/ui.c network/network.c
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 
