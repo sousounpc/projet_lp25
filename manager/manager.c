@@ -37,7 +37,7 @@ int manager_run_local(int dry_run_mode) {
     // On cherche le fichier sécurisé .htop_lp25_config
     remote_host_t *hosts = load_network_config(".htop_lp25_config");
     
-    process_t *processes = NULL;
+    process_info *processes = NULL;
     int running = 1;
 
     // Initialisation de l'UI (si pas déjà fait)

@@ -1,10 +1,9 @@
 #ifndef NETWORK_H
 #define NETWORK_H
-
 #include "../process/process.h"
 
-/* * Structure pour gérer les infos de connexion aux machines distantes.
- * Utilisée pour stocker ce qu'on lit dans le fichier de config.
+/* * Structure pour stocker les infos de connexion aux machines distantes.
+ * Permet de gérer une liste chaînée de serveurs (champ next).
  */
 typedef struct remote_host {
     char hostname[256];
@@ -12,16 +11,21 @@ typedef struct remote_host {
     int port;
     char username[128];
     char password[128];
-    struct remote_host *next; // Pour faire une liste de serveurs
+    struct remote_host *next; 
 } remote_host_t;
 
-// Charge le fichier .htop_lp25_config (doit être en chmod 600)
+/* --- Fonctions du module Network --- */
+
+// Lit le fichier de config et vérifie que les permissions sont en 600
 remote_host_t *load_network_config(const char *filename);
 
-// Se connecte en SSH sur l'hôte pour récupérer les processus via la commande 'ps'
+// Récupère la liste des processus d'un hôte via SSH
 process_t *fetch_remote_processes(remote_host_t *host);
 
-// Libère la mémoire de la liste des serveurs distants
+// Envoie un signal (Kill/Stop) à un processus sur une machine distante
+int send_remote_signal(remote_host_t *host, pid_t pid, int sig);
+
+// Libère la mémoire allouée pour la liste des hôtes
 void free_remote_hosts(remote_host_t *head);
 
-#endif
+#endif // NETWORK_H
