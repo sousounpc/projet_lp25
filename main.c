@@ -49,3 +49,4 @@ int main(int argc, char *argv[]) {
     manager_free_config(&config);
     return EXIT_SUCCESS;
 }
+

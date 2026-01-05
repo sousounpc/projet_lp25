@@ -13,7 +13,15 @@ typedef struct remote_host {
     char password[128];
     struct remote_host *next; 
 } remote_host_t;
-
+// Add this in network.h if it's missing
+typedef struct process_t {
+    int pid;
+    char user[64];
+    char command[256];
+    float cpu_percent;
+    float memory_percent;
+    struct process_t *next;
+} process_t;
 /* --- Fonctions du module Network --- */
 
 // Lit le fichier de config et vérifie que les permissions sont en 600
