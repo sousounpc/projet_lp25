@@ -13,7 +13,7 @@ typedef struct remote_host {
     char password[128];
     struct remote_host *next; 
 } remote_host_t;
-// Add this in network.h if it's missing
+
 typedef struct process_t {
     int pid;
     char user[64];
