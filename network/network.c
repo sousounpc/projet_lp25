@@ -157,6 +157,5 @@ void free_remote_hosts(remote_host_t *head) {
 // --- 4. SIGNALS (Optional Stub) ---
 int send_remote_signal(remote_host_t *host, int pid, int sig) {
     // Requires opening a new SSH session to run "kill -SIG <PID>"
-    // Leaving as stub for now to allow compilation
     return -1; 
 }
